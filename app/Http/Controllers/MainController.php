@@ -181,12 +181,14 @@ class MainController extends Controller
 
         try {
 
+            $get_license_info = DB::table('licensekeys')->where('customer_app_id', $request->customer_app_id)->whereIn('isActive', [0, 1, 2])->first();
+
             $get_app_info = DB::table('customer_apps')->where('customer_apps.id', $request->customer_app_id)
             ->join('customers', 'customer_apps.customer_id', 'customers.id')
             ->select('customer_apps.*', 'customers.api_key as api_key', 'customers.name as customer_name')
             ->first();
 
-            if (in_array($get_app_info->status, [0, 1, 2])) {
+            if ($get_license_info) {
                 return back()->with('fail', 'An error has occurred while processing your request. Message: The license key for '.$get_app_info->name.' - '.$get_app_info->customer_name.' already exists.');
             } else {
                 DB::beginTransaction();
