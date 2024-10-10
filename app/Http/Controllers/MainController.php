@@ -189,7 +189,7 @@ class MainController extends Controller
             ->first();
 
             if ($get_license_info) {
-                return back()->with('fail', 'An error has occurred while processing your request. Message: The license key for '.$get_app_info->name.' - '.$get_app_info->customer_name.' already exists.');
+                return back()->with('fail', 'An error has occurred while processing your request. Message: A valid license key for '.$get_app_info->name.' - '.$get_app_info->customer_name.' already exists.');
             } else {
                 DB::beginTransaction();
 
