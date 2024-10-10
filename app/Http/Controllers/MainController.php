@@ -18,8 +18,6 @@ class MainController extends Controller
 
     public function allCustomers(){
 
-        // dd($randomString);
-
         $customers = DB::table('customers')->get();
 
         $data = [
@@ -31,8 +29,6 @@ class MainController extends Controller
     }
 
     public function createCustomer(Request $request){
-
-        // dd($request->all());
 
         try {
             DB::beginTransaction();
