@@ -76,6 +76,7 @@
                     <table class="table myTable">
                         <thead>
                             <tr>
+                                <th>N°</th>
                                 <th>Name</th>
                                 <th>Code App</th>
                                 <th>Status</th>
@@ -84,8 +85,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
                             @foreach ($customer_apps as $customer_app)
                                 <tr>
+                                    <td><center>{{ $i.'.' }}</center></td>
                                     <td><strong>{{ $customer_app->name }}</strong></td>
                                     <td>{{ $customer_app->code_app }}</td>
                                     <td>
@@ -118,6 +123,9 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @php
+                                    $i++;
+                                @endphp
                             @endforeach
                         </tbody>
                     </table>

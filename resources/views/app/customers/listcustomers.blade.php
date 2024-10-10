@@ -85,7 +85,7 @@
                             @endphp
                             @foreach ($customers as $customer)
                                 <tr>
-                                    <td>{{ $i.'.' }}</td>
+                                    <td><center>{{ $i.'.' }}</center></td>
                                     <td><strong>{{ $customer->name }}</strong></td>
                                     <td>{{ $customer->email }}</td>
                                     <td>

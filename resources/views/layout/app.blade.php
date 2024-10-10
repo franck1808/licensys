@@ -76,7 +76,7 @@
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item {{ in_array($request->route()->getName(), ['allLicenseKeys', 'allCustomers', 'allCustomerApps']) ? 'active' : '' }}">
+            <li class="menu-item {{ $request->routeIs('allLicenseKeys') || $request->routeIs('allCustomers') || $request->routeIs('allCustomerApps') ? 'active' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Modules</div>

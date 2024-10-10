@@ -97,7 +97,7 @@
                             @endphp
                             @foreach ($licenses as $license)
                                 <tr>
-                                    <td>{{ $i.'.' }}</td>
+                                    <td><center>{{ $i.'.' }}</center></td>
                                     <td><i class="menu-icon bx bxs-key"></i><strong>{{ $license->key }}</strong></td>
                                     <td>{{ $license->customer_app_name.' - '.$license->customer_name }}</td>
                                     @php
