@@ -1,4 +1,4 @@
-
+@inject('request', 'Illuminate\Http\Request')
 <!DOCTYPE html>
 
 <!-- beautify ignore:start -->
@@ -68,7 +68,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item {{ $request->routeIs('dashboard') ? 'active' : '' }}">
               <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -76,24 +76,24 @@
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item">
+            <li class="menu-item {{ in_array($request->route()->getName(), ['allLicenseKeys', 'allCustomers', 'allCustomerApps']) ? 'active' : '' }}">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Modules</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item">
+                <li class="menu-item {{ $request->routeIs('allCustomers') ? 'active' : '' }}">
                   <a href="{{ route('allCustomers') }}" class="menu-link">
                     <div data-i18n="Without menu">Customers</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ $request->routeIs('allCustomerApps') ? 'active' : '' }}">
                   <a href="{{ route('allCustomerApps') }}" class="menu-link">
                     <div data-i18n="Without navbar">Customer's Apps</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ $request->routeIs('allLicenseKeys') ? 'active' : '' }}">
                   <a href="{{ route('allLicenseKeys') }}" class="menu-link">
                     <div data-i18n="Container">License Keys</div>
                   </a>
