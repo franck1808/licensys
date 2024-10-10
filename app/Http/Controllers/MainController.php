@@ -234,7 +234,8 @@ class MainController extends Controller
 
                 if ($key_info->isActive != 1) {
                     return response()->json([
-                        'error'=>'The license key has expired or suspended.'
+                        'status'=>404,
+                        'message'=>'The license key has expired or suspended.'
                     ]);
                 } else {
                     $key = Str::substr($key_info->key, 4, 44);
@@ -249,14 +250,16 @@ class MainController extends Controller
 
                     if ($customer_info->isActive != 1) {
                         return response()->json([
-                            'error'=>'Your customer api key has inactive or suspended.'
+                            'status'=>404,
+                            'message'=>'Your customer api key has inactive or suspended.'
                         ]);
                     } else {
                         $app_info = DB::table('customer_apps')->where('code_app', $app_key)->first();
 
                         if ($app_info->status != 1) {
                             return response()->json([
-                                'error'=>'This product code has inactive or suspended.'
+                                'status'=>404,
+                                'message'=>'This product code has inactive or suspended.'
                             ]);
                         } else {
                             $end = Carbon::parse($key_info->end_at);
@@ -267,7 +270,8 @@ class MainController extends Controller
                             }
 
                             return response()->json([
-                                'success'=>'Your license key is still valid for '.$remain.' days.'
+                                'status'=>200,
+                                'message'=>'Your license key is still valid for '.$remain.' days.'
                             ]);
                         }
                         
@@ -276,13 +280,14 @@ class MainController extends Controller
 
             } else {
                 return response()->json([
-                    'error'=>'The license key is not found.'
+                    'status'=>404,
+                    'message'=>'The license key is not found.'
                 ]);
             }
 
         } catch (\Exception $e) {
             return response()->json([
-                'error'=>$e->getMessage()
+                'message'=>$e->getMessage()
             ]);
         }
 
