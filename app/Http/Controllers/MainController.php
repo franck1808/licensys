@@ -305,8 +305,11 @@ class MainController extends Controller
 
                 if ($key_info->isActive != 1) {
                     return response()->json([
+                        'start_at'=>$key_info->start_at,
+                        'end_at'=>$key_info->end_at,
+                        'isActive'=>"Your license key has expired or suspended.",
                         'status'=>404,
-                        'message'=>'The license key has expired or suspended.'
+                        'remaining_time'=>0
                     ]);
                 } else {
                     $end = Carbon::parse($key_info->end_at);
@@ -318,6 +321,7 @@ class MainController extends Controller
                     return response()->json([
                         'start_at'=>$key_info->start_at,
                         'end_at'=>$key_info->end_at,
+                        'isActive'=>"Your license key is still valid.",
                         'status'=>200,
                         'remaining_time'=>$remain
                     ]);
@@ -325,8 +329,11 @@ class MainController extends Controller
 
             } else {
                 return response()->json([
+                    'start_at'=>NULL,
+                    'end_at'=>NULL,
+                    'isActive'=>"Your license key is not found.",
                     'status'=>404,
-                    'message'=>'The license key is not found.'
+                    'remaining_time'=>0
                 ]);
             }
 
