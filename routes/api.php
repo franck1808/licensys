@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/check_key', [MainController::class, 'checkKey']);
+Route::post('/get_info_key', [MainController::class, 'getInfoKey']);

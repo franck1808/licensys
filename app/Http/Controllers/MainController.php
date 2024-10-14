@@ -293,5 +293,49 @@ class MainController extends Controller
 
     }
 
+    public function getInfoKey(Request $request){
+
+        try {
+            $check_key = DB::table('licensekeys')->where('key', $request->key)->exists();
+
+            if ($check_key) {
+                $key_info = DB::table('licensekeys')->where('key', $request->key)
+                ->select('start_at', 'end_at', 'isActive')
+                ->first();
+
+                if ($key_info->isActive != 1) {
+                    return response()->json([
+                        'status'=>404,
+                        'message'=>'The license key has expired or suspended.'
+                    ]);
+                } else {
+                    $end = Carbon::parse($key_info->end_at);
+                    if (date('Y-m-d') <= $end) {
+                        $remain = $end->diffInDays(date('Y-m-d'));
+                    } else {
+                        $remain = 0;
+                    }
+                    return response()->json([
+                        'key_info'=>$key_info,
+                        'status'=>200,
+                        'message'=>'Your license key is still valid for '.$remain.' days.'
+                    ]);
+                }
+
+            } else {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'The license key is not found.'
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=>$e->getMessage()
+            ]);
+        }
+
+    }
+
 
 }
