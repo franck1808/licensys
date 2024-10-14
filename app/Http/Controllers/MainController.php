@@ -316,9 +316,10 @@ class MainController extends Controller
                         $remain = 0;
                     }
                     return response()->json([
-                        'key_info'=>$key_info,
+                        'start_at'=>$key_info->start_at,
+                        'end_at'=>$key_info->end_at,
                         'status'=>200,
-                        'message'=>'Your license key is still valid for '.$remain.' days.'
+                        'remaining_time'=>$remain
                     ]);
                 }
 
